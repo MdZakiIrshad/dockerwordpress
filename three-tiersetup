@@ -1,0 +1,9 @@
+# First install Docker using commnad "yum install docker"
+docker pull wordpress:latest
+# For Persistent Storage we need to create a folder and attach it to mySql , I have created mydata folder using mkdir mydata/.
+docker pull mysql:latest
+# To run mysql image 
+docker run -dit --name db -e MYSQL_ROOT_PASSWORD=zaki123  -e MYSQL_DATABASE=mydb  -e MYSQL_USER=zaki  MYSQL_PASSWORD=zaki123  -v  /mydata  /var/lib/sql  mysql:latest 
+# To run the wordpress image 
+docker run -dit --name mywordpress  -p 8080:80  --Link db wordpress:latest 
+# now you can configure wordpress go to  https:// YOURIP:8080/
